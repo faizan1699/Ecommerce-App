@@ -6,7 +6,8 @@ const nextConfig = {
     }
     return config;
   },
-  productionBrowserSourceMaps: false, // Disable production browser source maps
+  productionBrowserSourceMaps: false,
+  output: "export",
 };
 
 export default nextConfig;
