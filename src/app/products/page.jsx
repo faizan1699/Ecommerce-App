@@ -11,7 +11,6 @@ import 'slick-carousel/slick/slick-theme.css';
 const Products = () => {
 
     const [product, setProducts] = useState([]);
-    console.log(product.length)
     useEffect(() => {
         GetProducts();
     }, []);
@@ -19,6 +18,7 @@ const Products = () => {
     const reloadpage = () => {
         GetProducts();
     }
+    
 
     const GetProducts = async () => {
         try {
