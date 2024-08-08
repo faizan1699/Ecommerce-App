@@ -11,6 +11,7 @@ import 'slick-carousel/slick/slick-theme.css';
 const Products = () => {
 
     const [product, setProducts] = useState([]);
+    console.log(product.length)
     useEffect(() => {
         GetProducts();
     }, []);
@@ -22,8 +23,8 @@ const Products = () => {
     const GetProducts = async () => {
         try {
             const response = await axios.get('/api/products/get');
-            console.log(response);
-            setProducts(response?.data?.products || []);
+            // console.log(response);
+            setProducts(response?.data?.data?.products || []);
         } catch (error) {
             showAlert('error', 'Error', error?.response?.data?.message);
         }

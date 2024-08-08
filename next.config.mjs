@@ -7,7 +7,6 @@ const nextConfig = {
     return config;
   },
   productionBrowserSourceMaps: false,
-  output: "export",
 };
 
 export default nextConfig;
