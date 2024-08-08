@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 
-// Subcategories for each category
 const subcategories = [
   {
     id: 1,
@@ -52,7 +51,7 @@ const subcategories = [
 export async function GET(request) {
   const url = new URL(request.url);
   const id = parseInt(url.searchParams.get("id"), 10);
-  console.log(url);
+
   if (isNaN(id)) {
     return NextResponse.json({ error: "Invalid category ID" }, { status: 400 });
   }
@@ -63,5 +62,7 @@ export async function GET(request) {
     return NextResponse.json({ error: "Category not found" }, { status: 404 });
   }
 
-  return NextResponse.json(categorySubcategories.subcategories);
+  return NextResponse.json({
+    subcategories: categorySubcategories.subcategories,
+  });
 }

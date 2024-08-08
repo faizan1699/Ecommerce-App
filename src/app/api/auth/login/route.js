@@ -44,7 +44,7 @@ export async function POST(req) {
     const tokenData = {
       name: user.name,
       email: user.email,
-      role: user.role,
+      isadmin: user.isadmin,
       verified: user.emailverify,
       createdAt: user.createdAt,
     };

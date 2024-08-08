@@ -5,8 +5,8 @@ import connect from "@/app/utils/dbconfig/dbConfig";
 export async function GET(req) {
   try {
     await connect();
-    const products = await ProductModel.findOne({});
-
+    const products = await ProductModel.find();
+  
     const response = NextResponse.json({
       message: "success",
       success: true,

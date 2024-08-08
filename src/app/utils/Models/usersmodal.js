@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
 
   isadmin: {
     type: Boolean,
-    default: false
+    default: false,
   },
 
   createdAt: {
@@ -33,27 +33,25 @@ const userSchema = new mongoose.Schema({
 
   emailverify: {
     type: Boolean,
-    default: false, 
+    default: false,
   },
   emailverifytoken: {
     type: String,
-    default: null, 
+    default: null,
   },
   emailverifytokenexp: {
     type: Date,
-    default: null, 
+    default: null,
   },
   forgerpasswordtoken: {
-    type: String, 
-    default: null, 
+    type: String,
+    default: null,
   },
   forgerpasswordtokenexp: {
     type: Date,
     default: null,
-  }
-
+  },
 });
 
-
-const User = mongoose.models.users || mongoose.model("users" , userSchema);
+const User = mongoose.models.users || mongoose.model("users", userSchema);
 export default User;

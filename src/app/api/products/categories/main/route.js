@@ -9,5 +9,7 @@ const categories = [
 ];
 
 export async function GET() {
-  return NextResponse.json(categories);
+  return NextResponse.json({
+    category: categories,
+  });
 }

@@ -2,13 +2,19 @@
 
 import React, { createContext, useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
+import axios from 'axios';
 
 export const IfUserLoginContext = createContext(null);
+export const userDetail = createContext(null);
 
 const Context = ({ children }) => {
+
+    const [userdetail, setUserdetail] = useState([]);
     const [isLogin, setisLogin] = useState(false);
 
     useEffect(() => {
+
+        checkAdmin();
 
         const logincookie = Cookies.get("ua");
 
@@ -45,9 +51,22 @@ const Context = ({ children }) => {
     }, []);
 
 
+    const checkAdmin = async () => {
+        const email = "faizanrasheed169@gmail.com";
+        try {
+            const api = await axios.post("/api/auth/getuserrole", { email });
+            setUserdetail(api?.data?.userdata || []);
+        }
+        catch (err) {
+            console.log(err.response.data.message);
+        }
+    }
+
     return (
         <IfUserLoginContext.Provider value={{ isLogin, setisLogin }}>
-            {children}
+            <userDetail.Provider value={userdetail}>
+                {children}
+            </userDetail.Provider>
         </IfUserLoginContext.Provider>
     );
 };
