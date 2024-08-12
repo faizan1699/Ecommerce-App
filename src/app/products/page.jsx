@@ -82,6 +82,7 @@ const Products = () => {
                                                     {item.imgs.map((imgSrc, j) => (
                                                         <div key={j} className="relative">
                                                             <Image
+                                                                key={j}
                                                                 className="w-full h-64 object-cover border rounded"
                                                                 src={imgSrc}
                                                                 width={320}

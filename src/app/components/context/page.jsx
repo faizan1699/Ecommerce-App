@@ -13,11 +13,12 @@ const Context = ({ children }) => {
     const [isLogin, setisLogin] = useState(false);
 
     useEffect(() => {
-
         checkAdmin();
+    }, [isLogin]);
 
+    useEffect(() => {
+        checkAdmin();
         const logincookie = Cookies.get("ua");
-
         if (logincookie === 'true') {
             setisLogin(true);
         } else {
@@ -25,46 +26,19 @@ const Context = ({ children }) => {
         }
     }, []);
 
-
-    useEffect(() => {
-        const numberInputs = document.getElementsByTagName("input");
-
-        const handleKeyDown = (event) => {
-            if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-                event.preventDefault();
-            }
-        };
-
-        const handleWheel = (event) => {
-            event.preventDefault();
-        };
-        Array.from(numberInputs).forEach((input) => {
-            input.addEventListener('keydown', handleKeyDown);
-            input.addEventListener('wheel', handleWheel);
-        });
-        return () => {
-            Array.from(numberInputs).forEach((input) => {
-                input.removeEventListener('keydown', handleKeyDown);
-                input.removeEventListener('wheel', handleWheel);
-            });
-        };
-    }, []);
-
-
     const checkAdmin = async () => {
-        const email = "faizanrasheed169@gmail.com";
         try {
-            const api = await axios.post("/api/auth/getuserrole", { email });
-            setUserdetail(api?.data?.userdata || []);
+            const api = await axios.post("/api/auth/getuserrole");
+            setUserdetail(api?.data?.userdata);
         }
         catch (err) {
-            console.log(err.response.data.message);
+            console.log(err?.response?.data?.message);
         }
     }
 
     return (
         <IfUserLoginContext.Provider value={{ isLogin, setisLogin }}>
-            <userDetail.Provider value={userdetail}>
+            <userDetail.Provider value={{ userdetail, setUserdetail }}>
                 {children}
             </userDetail.Provider>
         </IfUserLoginContext.Provider>

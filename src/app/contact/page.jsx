@@ -31,12 +31,10 @@ const Contact = () => {
             <div className="my-3">
 
               {listItems.map((text, i) => (
-                <div>
-                  <li className='mt-3 text-justify pl-3 ml-4'>
-                    <span className='font-black'>{text.title}</span>
-                    <span className=''>{text.text}</span>
-                  </li>
-                </div>
+                <li key={i} className='mt-3 text-justify pl-3 ml-4'>
+                  <span className='font-black'>{text.title}</span>
+                  <span className=''>{text.text}</span>
+                </li>
               ))}
 
               <p className='my-12'>We strive to respond to all inquiries within 24 hours. Thank you for reaching out, and we look forward to assisting you!</p>
