@@ -18,6 +18,9 @@ const Context = ({ children }) => {
 
     useEffect(() => {
         checkAdmin();
+    }, []);
+
+    useEffect(() => {
         const logincookie = Cookies.get("ua");
         if (logincookie === 'true') {
             setisLogin(true);

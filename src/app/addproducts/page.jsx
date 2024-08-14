@@ -1,10 +1,17 @@
 "use client";
 
-import { showAlert } from '@/app/components/alert/alert';
-import React, { useEffect, useRef, useState } from 'react';
-import Loader from '../../assets/loader/loader.gif';
+import {
+    showAlert
+} from '../components/alert/alert';
+import {
+    useRef,
+    useState,
+    useEffect,
+} from 'react';
+
 import axios from 'axios';
 import Image from 'next/image';
+import Loader from "../assets/loader/loader.gif";
 
 const ProductUpload = () => {
 

@@ -105,8 +105,9 @@ const Topbar = () => {
                                     {navMenu.map((data, i) => (
                                         <Link href={data.href} key={i} className={linkclass} aria-current="page">{data.title}</Link>
                                     ))}
-                                    {userdetail.isadmin === true && <Link href="/admin/addproducts" className={linkclass} aria-current="page">Add new product</Link>}
-
+                                    {isLogin &&
+                                        <Link href={isLogin && "/addproducts"} className={linkclass} aria-current="page">Add new product</Link>
+                                    }
                                 </div>
                             </div>
                         </div>
