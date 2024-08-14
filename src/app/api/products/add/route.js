@@ -28,8 +28,21 @@ export async function POST(req) {
       discountedprice,
       imgs,
       category,
-      subcategry,
+      subcategory,
     } = reqbody;
+
+    if (!category) {
+      return NextResponse.json(
+        { message: "Category Required" },
+        { status: 400 }
+      );
+    }
+    if (!subcategory) {
+      return NextResponse.json(
+        { message: "Subategory Required" },
+        { status: 400 }
+      );
+    }
 
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const currentDateTime = DateTime.now().setZone(userTimezone);
@@ -39,7 +52,7 @@ export async function POST(req) {
       name,
       price,
       category,
-      subcategry,
+      subcategory,
       description,
       discountedprice,
       available: true,

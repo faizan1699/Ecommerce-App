@@ -4,22 +4,28 @@ import React, { useContext, useState } from 'react';
 import logo from '../../assets/logo/logo.png';
 import Image from 'next/image';
 import Link from 'next/link';
+import axios from 'axios';
+import avatar from "../../assets/imgs/avatar.png";
+
+import { userDetail } from '../context/page';
 import { IfUserLoginContext } from '../context/page';
 import { showAlert } from '../alert/alert';
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
 
 const navMenu = [
     { title: "Home", href: "/home" },
     { title: "Products", href: "/products" },
     { title: "Contact", href: "/contact" },
-    { title: "Add new product", href: "/admin/addproducts" },
 ];
 
 const Topbar = () => {
+
+
     const router = useRouter();
-    const linkclass = "rounded-md hover:bg-gray-700 px-3 py-2 text-sm font-medium text-white";
     const { isLogin, setisLogin } = useContext(IfUserLoginContext);
+    const { userdetail, setUserdetail } = useContext(userDetail);
+
+    const linkclass = "rounded-md hover:bg-gray-700 px-3 py-2 text-sm font-medium text-white";
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -34,6 +40,7 @@ const Topbar = () => {
             router.push("/");
             setisLogin(false);
             setIsMenuOpen(false);
+            setUserdetail([]);
         } catch (error) {
             console.log(error);
             showAlert("error", "Error", error?.response?.data?.message, 5000);
@@ -98,6 +105,9 @@ const Topbar = () => {
                                     {navMenu.map((data, i) => (
                                         <Link href={data.href} key={i} className={linkclass} aria-current="page">{data.title}</Link>
                                     ))}
+                                    {isLogin &&
+                                        <Link href={isLogin && "/addproducts"} className={linkclass} aria-current="page">Add new product</Link>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -107,7 +117,7 @@ const Topbar = () => {
                             <div className="relative ml-3">
                                 <div>
                                     {isLogin ? (
-                                        <>
+                                        <div className='flex items-center'>
                                             <button
                                                 type="button"
                                                 className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -117,13 +127,24 @@ const Topbar = () => {
                                                 onClick={toggleUserMenu}
                                             >
                                                 <span className="sr-only">Open user menu</span>
-                                                <img
-                                                    className="h-8 w-8 rounded-full"
-                                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                    alt="User Profile"
+                                                <Image
+                                                    src={avatar}
+                                                    className='rounded-full w-8'
+                                                    alt='user logo'
                                                 />
                                             </button>
-                                        </>
+                                            <div className='flex flex-col text-center'>
+                                                {userdetail.name && (
+                                                    <span className='text-white ml-2'>
+                                                        {userdetail.name.length > 10
+                                                            ? `${userdetail.name.substring(0, 6)} ...`
+                                                            : userdetail.name 
+                                                        }
+                                                    </span>
+                                                )}
+                                                {userdetail.isadmin === true && (<span className='ml-2 text-red-500 text-center' style={{ fontSize: 12 }}>{userdetail.isadmin === true ? "Admin" : ""}</span>)}
+                                            </div>
+                                        </div>
                                     ) : (
                                         <div>
                                             <Link className={linkclass} href="/login">Login</Link>

@@ -23,11 +23,11 @@ export const productSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    required: true,
+    required: [true , "category required"],
   },
   subcategry: {
     type: String,
-    required: true,
+    required: [true , "subcategory required"],
   },
   available: {
     type: Boolean,
