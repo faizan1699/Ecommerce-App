@@ -78,8 +78,21 @@ const Login = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+
+                        <div className='flex justify-between'>
+                            
+                            <span>
+                                <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+                            </span>
+                          
+                            <Link href="">
+                                <label htmlFor="forgetpassword" className="block text-sm font-medium text-gray-400">Forget Password</label>
+                            </Link>
+
+                        </div>
+
                         <div className="mb-4 flex border rounded-lg items-center">
+
                             <input
                                 type={showpassword === true ? "password" : "text"}
                                 id="password"
@@ -89,13 +102,17 @@ const Login = () => {
                                 className="mt-1 border-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 required
                             />
+
                             <span className='flex items-center mr-2'>
                                 <FontAwesomeIcon onClick={() => SetShowPassword(!showpassword)} icon={showpassword === true ? faEye : faEyeSlash} className='text-gray-900' />
                             </span>
+
                         </div>
+
                     </div>
 
                     <button type="submit" className="w-full mt-4 py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+
                         {loading ?
                             <span className='flex justify-center items-center'>
                                 <Image
@@ -106,7 +123,9 @@ const Login = () => {
                             </span>
                             : "Login"}
                     </button>
+
                 </form>
+
                 <div className='text-sm flex justify-end mt-2'> Not have account yet
                     <Link className='ml-2 text-red-800' href="/register">Register</Link>
                 </div>

@@ -117,7 +117,7 @@ const Topbar = () => {
                             <div className="relative ml-3">
                                 <div>
                                     {isLogin ? (
-                                        <>
+                                        <div className='flex items-center'>
                                             <button
                                                 type="button"
                                                 className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -133,7 +133,18 @@ const Topbar = () => {
                                                     alt='user logo'
                                                 />
                                             </button>
-                                        </>
+                                            <div className='flex flex-col text-center'>
+                                                {userdetail.name && (
+                                                    <span className='text-white ml-2'>
+                                                        {userdetail.name.length > 10
+                                                            ? `${userdetail.name.substring(0, 6)} ...`
+                                                            : userdetail.name 
+                                                        }
+                                                    </span>
+                                                )}
+                                                {userdetail.isadmin === true && (<span className='ml-2 text-red-500 text-center' style={{ fontSize: 12 }}>{userdetail.isadmin === true ? "Admin" : ""}</span>)}
+                                            </div>
+                                        </div>
                                     ) : (
                                         <div>
                                             <Link className={linkclass} href="/login">Login</Link>
