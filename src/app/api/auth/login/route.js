@@ -32,6 +32,12 @@ export async function POST(req) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
+    const isverified = await user.emailverify;
+  
+    if (!isverified) {
+      return NextResponse.json({ message: "pls verify your email first" }, { status: 400 });
+    }
+
     const checkPassword = await bcrypt.compare(password, user.password); // Fixed the password comparison
 
     if (!checkPassword) {

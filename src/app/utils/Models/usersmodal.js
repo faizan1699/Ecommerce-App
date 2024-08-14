@@ -37,19 +37,18 @@ const userSchema = new mongoose.Schema({
   },
   emailverifytoken: {
     type: String,
-    default: null,
   },
   emailverifytokenexp: {
     type: Date,
-    default: null,
+  },
+  userverificationDate: {
+    type: Date,
   },
   forgerpasswordtoken: {
     type: String,
-    default: null,
   },
   forgerpasswordtokenexp: {
     type: Date,
-    default: null,
   },
 });
 

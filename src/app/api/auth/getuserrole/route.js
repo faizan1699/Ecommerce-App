@@ -7,7 +7,9 @@ import jwt from "jsonwebtoken";
 connect();
 
 export async function POST(req) {
+ 
   try {
+    
     const x = req.cookies.get("jwt");
     const y = x && typeof x === "object" ? x.value : x;
     const z = jwt.decode(y, { complete: true });
